@@ -1,0 +1,433 @@
+class Care_All():
+    """ Storing Data """
+    
+    l=[["342","abhi1234","Abhirup Nag",4.5,2,500,["892","076"]],["983","arin2345","Arindom Roy",4.0,1,100,["652"]],["251","ari4321","Arijeet Sen",4.7,4,9600,["099","656","344","007"]],["734","sus567","Susmita Roy",4.8,3,700,["767","414","143"]]]
+    l2={"342":"abhi1234","983":"arin2345","251":"ari4321","734":"sus567"}
+    l3=[["892","deba423","Debayan Ghosh",62,["342"]],["076","rup321","Rupjeet Nandi",73,["342"]],["652","sandi898","Sandeep Chatterjee",81,["983"]],["099","amar1234","Amaresh Bagh",64,["251"]],["656","sapna76","Sapnadeep Guin",79,["251"]],["344","sura563","Suranjana Roy",87,["251"]],["007","arun721","Arunava Nandi",61,["251"]],["767","as076","Asish Chatterjee",72,["734"]],["414","su934","Sukanya Roy",88,["734"]],["143","silu2","Sneha Basak",63,["734"]]]
+    l4={"892":"deba423","076":"rup321","652":"sandi898","099":"amar1234","656":"sapna76","344":"sura563","007":"arun721","767":"as076","414":"su934","143":"silu2"}
+    
+   
+    def __init__(self,name):
+        self.name=name
+        print(" *{ Care All }* ".center(70,"*"))
+        print(" WE ARE HERE , BECAUSE WE CARE ".center(70,"*"))
+        print()
+        print("**Welcome Mr/Ms {} To Care All**".format(self.name).center(70," "))
+        print()
+        
+    def start(self):
+        """ Starting The Applicaion"""
+        
+        print("What Do You Want ?")
+        Do=[[1,"Do You Need Care ?"],[2,"Do You Want To Care ?"]]
+        for i in Do:
+            print(i[0]," ",i[1])
+        c=int(input("Press 1 Or 2 To Continue  "))
+        if c==1:
+            self.need_care()
+        elif c==2:
+            self.do_care()
+        else:
+            print("Invalid Input")
+            print("Thanks For Visiting Us :) ".center(70,"*"))
+    
+    def need_care(self):
+        """choose between new user and existing user"""
+        
+        user=[[1,"New User"],[2,"Existing User"]]
+        for i in user:
+            print(i[0]," ",i[1])
+        a=True
+        while a:
+            c=int(input("Press 1 Or 2 To Continue  "))
+            if c!=1 and c!=2:
+                print("Invalid Input")
+                print("Do You Wish To Continue ?")
+                c1=input("Press Y For YES And N For NO  ").lower()
+                if c1!="y":
+                    a=False
+                    print("Thanks for visiting us!".center(70,"*"))
+            elif c==1:
+                a=False
+                print("Hi ! Welcome To Care All".center(70,"*"))
+                print("To Start you Have To Register With Us ".center(70," "))
+                print("Pleae Enter The Following Details")
+                b=True
+                while b:
+                    new_u_id=input("Please Enter Your Preferable User-ID  ")
+                    if new_u_id in self.l4.keys():
+                        print("This Id is Already Exits, You Have To Give Another One")
+                    else:
+                        b=False
+                        name=input("Enter Your Nmae  ")
+                        age=int(input("Enter Your Age  "))
+                        no=int(input("Enter Your Contact Number  "))
+                        c=True
+                        while c:
+                            pas=input("Create Your New Password  ")
+                            pas2=input("Re-Enter Your Password  ")
+                            if pas!=pas2:
+                                print("Password Doesn't Match")
+                            else:
+                                c=False
+                                print("ID : {}".format(new_u_id).center(70," "))
+                                print("NAME : {}".format(name).center(70," "))
+                                print("AGE : {}".format(age).center(70," "))
+                                print("PHONE NO : {}".format(no).center(70," "))
+                                print("Thank You For Registering With Us".center(70,"*"))
+                                l=[]
+                                l2=[]
+                                l.append(new_u_id)
+                                l.append(pas)
+                                l.append(name)
+                                l.append(age)
+                                
+                                l.append(l2)
+                                self.l3.append(l)
+                                self.l4[new_u_id]=pas
+                                
+                                d=True
+                                while d:
+                                    print("Do You Want To LogIn Now ?")
+                                    t=input("Press Y For Yes And N For No  ").lower()
+                                    if t!="y" and t!="n":
+                                        print("Invalid Input")
+                                    elif t=="n":
+                                        d=False
+                                        print("Thanks For Visiting Care All".center(70,"*"))
+                                    else:
+                                        d=False
+                                        self.need_care_validation()
+                                        
+                                        
+            else:
+                a=False
+                self.need_care_validation()
+                
+                
+    def need_care_validation(self):
+        """username and password validation 
+           username or password exist or not"""
+        
+        
+        print("Hi ! Welcome Back ".center(70,"*"))
+        print("Please Enter The Details To Continue".center(70," "))
+        b=True
+        while b:
+            u_id=input("Enter Your Care_All User Id  ")
+            u_pass=input("Enter Your Care_All User Password  ")
+            if u_id in self.l4.keys():
+                if self.l4[u_id]==u_pass:
+                    b=False
+                    print("You Are Logged In".center(70,"*"))
+                    print("You Are Here For Taking Care".center(70," "))
+                    for i in self.l3:
+                        if i[0]==u_id:
+                            
+                            print("ID : {}".format(u_id).center(70," "))
+                            print("NAME : {}".format(i[2]).center(70," "))
+                            print("AGE : {}".format(i[3]).center(70," "))
+                            
+                else:
+                    print("Invalid ID Or Password")
+            else:
+                print("Invalid ID Or Password")
+        self.need_care_display(u_id)
+        
+        
+        
+        
+    def need_care_display(self,u_id):
+        """display who all are caring
+           and who are available for caring"""
+        
+        
+        print("What Do You Want To Know ?")
+        Do=[[1,"Want To Show Who All Are Caring?"],[2,"Who Are Available To Care You?"],[3,"Who Are Caring You?"]]
+        for i in Do:
+            print(i[0]," ",i[1])
+        c=int(input("Press 1 Or 2 Or 3 To Continue  "))
+        if c==1:
+            print("*".center(70,"*"))
+            print("  Id            Name           Ratings  ".center(70,"*"))
+            print("*".center(70,"*"))
+            for i in self.l:
+                print("                   ",i[0],"     ",i[2],"     ",i[3])
+            print("*".center(70,"*"))
+            a=True
+            while a:
+                print("Do You Want To Go Back previous Menu?")
+                c1=input("Press Y For Yes And N For No  ").lower()
+                if c1!="y" and c1!="n":
+                    print("Invalid Input")
+                elif c1=="y":
+                    a=False
+                    self.need_care_display(u_id)
+                else:
+                    a=False
+                    print("Thanks For Visiting Care All".center(70,"*"))
+        elif c==2:
+            print("*".center(70,"*"))
+            print("  Id            Name           Ratings  ".center(70,"*"))
+            print("*".center(70,"*"))
+            for i in self.l:
+                if i[4]<4:
+                    print("                   ",i[0],"     ",i[2],"     ",i[3])
+            print("*".center(70,"*"))
+            b=True
+            while b:
+                print("Do You Want To Take Care From Someone Here?")
+                c2=input("Press Y For Yes And N For No  ").lower()
+                if c2!="y" and c2!="n":
+                    print("Invalid Input")
+                elif c2=="n":
+                    b=False
+                    d=True
+                    while d:
+                        print("Do You Want To Go Back Previous Menu?" )
+                        c3=input("Press Y For Yes And N For No  ").lower()
+                        if c3!="y" and c3!="n":
+                            print("Invalid Input")
+                        elif c3=="y":
+                            d=False
+                            self.start()
+                        else:
+                            d=False
+                            print("Thanks For Visiting Care All".center(70,"*"))
+                else:
+                    b=False
+                    print("From Whom You Want To Take Care ?")
+                    c4=input("Please Enter The Id Of That Person  ")
+                    c5=int(input("Please Enter The Amount You Want To Give For That Care  "))
+                    for j in self.l:
+                        if j[0]==c4:
+                            print("You Choose Id:{}  NAME:{}  RATINGS:{}".format(j[0],j[2],j[3]))
+                            for g in self.l3:
+                                if g[0]==u_id:
+                                    g[4].append(c4)
+                            j[4]+=1
+                            j[5]+=c5
+                            j[6].append(u_id)
+                            
+                            print()
+                            
+                            
+                    print("Thank You For Choosing Us".center(70,"*"))
+                    e=True
+                    while e:
+                        print("Do You Want To See Who Care you?")
+                        s=input("Press Y For Yes And N For No").lower()
+                        if s!="y" and s!="n":
+                            print("Invalid Input")
+                        elif s=="y":
+                            e=False
+                            self.display(u_id)
+                        else:
+                            e=False
+                            f=True
+                            while f:
+                                print("Do you Want To Exit?")
+                                x=input("Press Y For Yes And N For No").lower()
+                                if x!="y" and x!="n":
+                                    print("Invalid Input")
+                                elif x=="y":
+                                    f=False
+                                    print("Thank You For Visiting Us".center(70,"*"))
+                                else:
+                                    f=False
+                                    self.start()
+        elif c==3:
+            self.display(u_id)
+           
+        else:
+            print("Invalid Input")
+            
+            
+                                    
+                                    
+                                    
+    def display(self,u_id):
+        """display who are caring you"""
+        
+        print("Who Is Giving Care To You:")
+        for i in self.l3:
+            if i[0]==u_id:
+                if len(i)>4:
+                    
+                    for j in i[4]:
+                        for k in self.l:
+                            if j==k[0]:
+                                
+                                
+                                print("Id:{}  NAME:{}  RATINGS:{}".format(k[0],k[2],k[3]))
+                else:
+                    print("No-One Is Giving Care To You".center(70,"*"))
+        a=True
+        while a:
+            print("Do You Want To Go Back Previous Menu?")
+            r=input("Press Y For Yes And N For No  ").lower()
+            if r!="y" and r!="n":
+                print("Invalid")
+            elif r=="n":
+                a=False
+                print("Thank You For Visiting Us".center(70,"*"))
+            else:
+                a=False
+                self.need_care_display(u_id)
+                
+           
+                    
+                    
+                                
+    def do_care(self):
+        user=[[1,"New User"],[2,"Existing User"]]
+        for i in user:
+            print(i[0]," ",i[1])
+        a=True
+        while a:
+            c=int(input("Press 1 Or 2 To Continue  "))
+            if c!=1 and c!=2:
+                print("Invalid Input")
+                print("Do You Wish To Continue ?")
+                c1=input("Press Y For YES And N For NO  ").lower()
+                if c1!="y":
+                    a=False
+                    print("Thanks for visiting us!".center(70,"*"))
+            elif c==1:
+                a=False
+                print("Hi ! Welcome To Care All".center(70,"*"))
+                print("To Start you Have To Register With Us ".center(70," "))
+                print("Pleae Enter The Following Details")
+                b=True
+                while b:
+                    new_u_id=input("Please Enter Your Preferable User-ID  ")
+                    if new_u_id in self.l2.keys():
+                        print("This Id is Already Exits, You Have To Give Another One")
+                    else:
+                        b=False
+                        name=input("Enter Your Nmae  ")
+                        age=int(input("Enter Your Age  "))
+                        no=int(input("Enter Your Contact Number  "))
+                        c=True
+                        while c:
+                            pas=input("Create Your New Password  ")
+                            pas2=input("Re-Enter Your Password  ")
+                            if pas!=pas2:
+                                print("Password Doesn't Match")
+                            else:
+                                c=False
+                                print("ID : {}".format(new_u_id).center(70," "))
+                                print("NAME : {}".format(name).center(70," "))
+                                print("AGE : {}".format(age).center(70," "))
+                                print("PHONE NO : {}".format(no).center(70," "))
+                                print("Thank You For Registering With Us".center(70," "))
+                                m=[]
+                                n=[]
+                                m.append(new_u_id)
+                                m.append(pas)
+                                m.append(name)
+                                
+                                m.extend([0,0,0])
+                                m.append(n)
+                               
+                                self.l.append(m)
+                                
+                                self.l2[new_u_id]=pas
+                                d=True
+                                while d:
+                                    print("Do You Want To LogIn Again ?")
+                                    t=input("Press Y For Yes And N For No  ").lower()
+                                    if t!="y" and t!="n":
+                                        print("Invalid Input")
+                                    elif t=="n":
+                                        d=False
+                                        print("Thanks For Visiting Care All".center(70,"*"))
+                                    else:
+                                        d=False
+                                        self.do_care_validation()
+                                        
+                                        
+            else:
+                a=False
+                self.do_care_validation()
+                
+    def do_care_validation(self):
+        
+        
+        print("Hi ! Welcome Back ".center(70,"*"))
+        print("Please Enter The Details To Continue".center(70," "))
+        b=True
+        while b:
+            u_id=input("Enter Your Care_All User Id  ")
+            u_pass=input("Enter Your Care_All User Password  ")
+            if u_id in self.l2.keys():
+                if self.l2[u_id]==u_pass:
+                    b=False
+                    print("You Are Logged In".center(70,"*"))
+                    print("You Are Here For giving Care".center(70," "))
+                    for i in self.l:
+                        if u_id==i[0]:
+                            print("ID: {}".format(i[0]).center(70," "))
+                            print("NAME: {}".format(i[2]).center(70," "))
+                            print("Rating: {}".format(i[3]).center(70," "))
+                            print("NO OF PERSON YOU CARE: {}".format(i[4]).center(70," "))
+                            print("AVAILABLE BALANCE: {}".format(i[5]).center(70," "))
+                            
+                
+                else:
+                    print("Invalid ID Or Password")
+            else:
+                print("Invalid ID Or Password")
+        self.do_care_display(u_id)
+        
+        
+        
+    def do_care_display(self,u_id):
+        for i in self.l:
+            if i[0]==u_id:
+                if len(i)>6:
+                    print("List Of Person You Are Caring".center(70,"*"))
+                    print("*".center(70,"*"))
+                    print("  Id            Name           Age  ".center(70,"*"))
+                    print("*".center(70,"*"))
+                    for j in i[6]:
+                        for k in self.l3:
+                            if j==k[0]:
+                                print("                   ",k[0],"     ",k[2],"     ",k[3])
+                
+                    print("*".center(70,"*"))
+                else:
+                    print("No-One Is Taking Care From You".center(70,"*"))
+                        
+        a=True
+        while a:
+            print("Do You Want To Go Back Main Menu?")
+            r=input("Press Y For Yes And N For No  ").lower()
+            if r!="y" and r!="n":
+                print("Invalid")
+            elif r=="n":
+                a=False
+                print("Thank You For Visiting Us".center(70,"*"))
+            else:
+                a=False
+                self.do_care()
+                        
+            
+        
+        
+if __name__=="__main__":
+    
+    a=True
+    while a:
+        name=input("Hi ! What Is Your Name ?  ")
+        if name=="":
+            print("Invalid Input , Please Enter A Name")
+            print("Do You Wish To Continue ?")
+            c=input("Press Y For YES And N For NO  ").lower()
+            if c!="y":
+                a=False
+                print("Thanks for visiting us!")
+        else :
+            a=False
+            C=Care_All(name)
+            C.start()
